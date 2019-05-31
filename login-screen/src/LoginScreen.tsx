@@ -20,6 +20,15 @@ interface State {
     passwordValid: boolean;
 }
 
+const initoalState = {
+    email: "",
+    password: "",
+    emailTouched: false,
+    passwordTouched: false,
+    emailValid: false,
+    passwordValid: false
+}
+
 export default class LoginScreen extends React.Component<{}, State> {
 
     passwordInputRef = React.createRef<FormTextInput>();
@@ -70,11 +79,14 @@ export default class LoginScreen extends React.Component<{}, State> {
     handlePasswordBlur = () => {
       this.setState({ passwordTouched: true });
     };
-  
-    handleLoginPress = () => {
-      console.log("Login button pressed");
+
+    handleButtonPress = () => {
+      this.props.navigation.navigate('Success', {reset: this.reset.bind(this)})
     };
 
+    reset() {
+      this.setState(initoalState);
+    }
 
   render() {
     const {
@@ -92,7 +104,7 @@ export default class LoginScreen extends React.Component<{}, State> {
     const passwordError =
         (!password && passwordTouched) ? strings.PASSWORD_REQUIRED :
         (!passwordValid && passwordTouched) ? strings.PASSWORD_VALID : undefined;
-
+    
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -122,7 +134,7 @@ export default class LoginScreen extends React.Component<{}, State> {
             />
             <Button 
               label={strings.LOGIN} 
-              onPress={this.handleLoginPress}
+              onPress={this.handleButtonPress}
               disabled={!email || !password || !emailValid || !passwordValid}
             />
           </View>
