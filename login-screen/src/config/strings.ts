@@ -4,7 +4,9 @@ const strings = {
     EMAIL_PLACEHOLDER: "Email",
     PASSWORD_PLACEHOLDER: "Password",
     EMAIL_REQUIRED: "Email is not valid",
-    PASSWORD_REQUIRED: "Password is not valid"
+    PASSWORD_REQUIRED: "Password is not valid",
+    EMAIL_VALID: "Email is not valid",
+    PASSWORD_VALID: "Password should contain at least 6 characters.",
   };
   
   export default strings;

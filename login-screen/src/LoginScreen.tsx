@@ -87,13 +87,11 @@ export default class LoginScreen extends React.Component<{}, State> {
     } = this.state;
 
     const emailError =
-      (!email && emailTouched) || (!emailValid && emailTouched)
-        ? strings.EMAIL_REQUIRED
-        : undefined;
+        (!email && emailTouched) ? strings.EMAIL_REQUIRED :
+        (!emailValid && emailTouched) ? strings.EMAIL_VALID : undefined;
     const passwordError =
-      (!password || !passwordValid) && passwordTouched 
-        ? strings.PASSWORD_REQUIRED
-        : undefined;
+        (!password && passwordTouched) ? strings.PASSWORD_REQUIRED :
+        (!passwordValid && passwordTouched) ? strings.PASSWORD_VALID : undefined;
 
     return (
       <KeyboardAvoidingView
