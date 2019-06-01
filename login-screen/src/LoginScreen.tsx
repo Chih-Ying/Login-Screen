@@ -14,20 +14,20 @@ import colors from "./config/colors";
 import strings from "./config/strings";
 
 interface State {
-    email: string;
+    username: string;
     password: string;
-    emailTouched: boolean;
+    usernameTouched: boolean;
     passwordTouched: boolean;
-    emailValid: boolean;
+    usernameValid: boolean;
     passwordValid: boolean;
 }
 
 const initoalState = {
-    email: "",
+  username: "",
     password: "",
-    emailTouched: false,
+    usernameTouched: false,
     passwordTouched: false,
-    emailValid: false,
+    usernameValid: false,
     passwordValid: false
 }
 
@@ -36,25 +36,17 @@ export default class LoginScreen extends React.Component<{}, State> {
     passwordInputRef = React.createRef<FormTextInput>();
 
     readonly state: State = {
-        email: "",
+        username: "",
         password: "",
-        emailTouched: false,
+        usernameTouched: false,
         passwordTouched: false,
-        emailValid: false,
+        usernameValid: false,
         passwordValid: false
     };
 
-    handleEmailChange = (email: string) => {
-      emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-      if (!emailValid) {
-        this.setState({ email: email, emailValid: false });
-        console.log("Email is Not Correct");
-        return false;
-      } else {
-        console.log("Email is Correct");
-        this.setState({ email: email, emailValid: true });
-      }
-    };
+    handleUsernameChange = (username: string) => {
+      this.setState({username: username});
+    }
   
     handlePasswordChange = (password: string) => {
       passwordValid = password.length >= 6;
@@ -68,14 +60,9 @@ export default class LoginScreen extends React.Component<{}, State> {
       }
     };
   
-    handleEmailSubmitPress = () => {
-      if (this.passwordInputRef.current) {
-        this.passwordInputRef.current.focus();
-      }
-    };
   
-    handleEmailBlur = () => {
-      this.setState({ emailTouched: true });
+    handleUsrnameBlur = () => {
+      this.setState({ usernameTouched: true });
     };
   
     handlePasswordBlur = () => {
@@ -96,17 +83,17 @@ export default class LoginScreen extends React.Component<{}, State> {
 
   render() {
     const {
-      email,
+      username,
       password,
-      emailTouched,
+      usernameTouched,
       passwordTouched,
-      emailValid,
       passwordValid
     } = this.state;
 
-    const emailError =
-        (!email && emailTouched) ? strings.EMAIL_REQUIRED :
-        (!emailValid && emailTouched) ? strings.EMAIL_VALID : undefined;
+    const usernameError = 
+        !username && usernameTouched ?
+        strings.USERNAME_REQUIRED : undefined;
+
     const passwordError =
         (!password && passwordTouched) ? strings.PASSWORD_REQUIRED :
         (!passwordValid && passwordTouched) ? strings.PASSWORD_VALID : undefined;
@@ -118,15 +105,13 @@ export default class LoginScreen extends React.Component<{}, State> {
         <Image source={imageLogo} style={styles.logo} />
           <View style={styles.form}>
             <FormTextInput
-              value={this.state.email}
-              onChangeText={this.handleEmailChange}
-              onSubmitEditing={this.handleEmailSubmitPress}
-              placeholder={strings.EMAIL_PLACEHOLDER}
+              value={this.state.username}
+              onChangeText={this.handleUsernameChange}
+              placeholder={strings.USERNAME_PLACEHOLDER}
               autoCorrect={false}
-              keyboardType="email-address"
               returnKeyType="next"
-              onBlur={this.handleEmailBlur}
-              error={emailError}
+              onBlur={this.handleUsrnameBlur}
+              error={usernameError}
             />
             <FormTextInput
               ref={this.passwordInputRef}
@@ -141,7 +126,7 @@ export default class LoginScreen extends React.Component<{}, State> {
             <WideButton 
               label={strings.LOGIN} 
               onPress={this.handleWideButtonPress}
-              disabled={!email || !password || !emailValid || !passwordValid}
+              disabled={!username || !password || !passwordValid}
             />
             <Text style={styles.signinText}>Don't have an account? 
               <Text style={styles.signinPressedText} 
