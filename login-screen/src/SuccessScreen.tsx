@@ -3,10 +3,8 @@ import {
   StyleSheet,
   Text, 
   View, 
-  Button,
-  Image
+  Button
 } from 'react-native';
-import imageLogo from "./assets/images/logo.png";
 
 export default class SuccessScreen extends React.Component {
 

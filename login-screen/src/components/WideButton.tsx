@@ -8,7 +8,7 @@ interface Props {
   onPress: () => void;
 }
 
-class Button extends React.Component<Props> {
+class WideButton extends React.Component<Props> {
   render() {
     const { disabled, label, onPress } = this.props;
     // If the button is disabled we lower its opacity
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Button;
+export default WideButton;

@@ -2,10 +2,11 @@ import * as React from "react";
 import { 
   Image, 
   KeyboardAvoidingView, 
-  StyleSheet, 
+  StyleSheet,
+  Button, 
   View 
 } from "react-native";
-import Button from "./components/Button";
+import WideButton from "./components/WideButton";
 import FormTextInput from "./components/FormTextInput";
 import imageLogo from "./assets/images/logo.png";
 import colors from "./config/colors";
@@ -80,8 +81,12 @@ export default class LoginScreen extends React.Component<{}, State> {
       this.setState({ passwordTouched: true });
     };
 
-    handleButtonPress = () => {
+    handleWideButtonPress = () => {
       this.props.navigation.navigate('Success', {reset: this.reset.bind(this)})
+    };
+
+    handleButtonPress = () => {
+      this.props.navigation.navigate('Signin', {reset: this.reset.bind(this)})
     };
 
     reset() {
@@ -132,11 +137,15 @@ export default class LoginScreen extends React.Component<{}, State> {
               onBlur={this.handlePasswordBlur}
               error={passwordError} 
             />
-            <Button 
+            <WideButton 
               label={strings.LOGIN} 
-              onPress={this.handleButtonPress}
+              onPress={this.handleWideButtonPress}
               disabled={!email || !password || !emailValid || !passwordValid}
             />
+            <Button
+              title="Sign In"
+              onPress={this.handleButtonPress}
+              />
           </View>
       </KeyboardAvoidingView>
     );
