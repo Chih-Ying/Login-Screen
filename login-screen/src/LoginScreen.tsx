@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView, 
   StyleSheet,
   Button, 
+  Text,
   View 
 } from "react-native";
 import WideButton from "./components/WideButton";
@@ -142,10 +143,13 @@ export default class LoginScreen extends React.Component<{}, State> {
               onPress={this.handleWideButtonPress}
               disabled={!email || !password || !emailValid || !passwordValid}
             />
-            <Button
-              title="Sign In"
-              onPress={this.handleButtonPress}
-              />
+            <Text style={styles.signinText}>Don't have an account? 
+              <Text style={styles.signinPressedText} 
+                    onPress={this.handleButtonPress}>
+                    Sign In
+                    </Text>
+            </Text>
+
           </View>
       </KeyboardAvoidingView>
     );
@@ -169,5 +173,14 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       width: "80%"
+    },
+    signinText: {
+      fontSize: 16,
+      textAlign: 'center'
+    },
+    signinPressedText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: colors.DODGER_BLUE
     }
   });
